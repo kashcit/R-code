@@ -1,6 +1,8 @@
-nakShatra= readLines("nakShatra_list.txt",encoding="UTF-8")
+setwd("/home/vvasuki/somasushma/R-code/scripts/")
+print(getwd())
+nakShatra= readLines("../data/nakShatra_list.txt",encoding="UTF-8")
 
-windowsFonts(Skt1=windowsFont("Siddhanta"))
+# windowsFonts(Skt1=windowsFont("Siddhanta"))
 
 e=exp(1)
 
@@ -8,7 +10,7 @@ kAla="-2999 : 1 : 16; 13: 24" #enter time for time stamp
 prec.angle=0 #give in radians with respect to kR^ittikA 0 points
 
 # equal division with abhijit or not
-w.abh=F
+w.abh=T
 if(w.abh) d=28 else{ 
   d=27
   nakShatra=nakShatra[-20]
@@ -55,10 +57,10 @@ points(e^(1i*sun)*.825, pch=sun.pt, col="darkorange3", cex=1.5) #Sun
 points(e^(1i*moon)*.825, pch=m.phase.box[m.phase], col="black", cex=1) #Moon
 points(e^(1i*(3*pi/2+tbox[z.point]))*.85, pch=4, col="red") # winter solstice
 points(e^(1i*(pi/2+tbox[z.point]))*.85, pch=4, col="blue") # summer solstice
-points(abh, pch=16, cex=.8, col="deepskyblue4") #abhijit
+points(abh, pch=13, cex=1.2, col="deepskyblue4") #abhijit
 
 sapply(0:26, function(x)   {if(t*x*180/pi>90) pos=2 else pos=4; text(nakShatra[x+1],x=Re(zlab[x+1]), y=Im(zlab[x+1]), adj = 0, srt=tbox[x+1]*180/pi, family="Skt1")})
 mtext(kAla, side =2,  cex=1)
 
-dev.copy(png, file="~/R/Dataexperiments/Figs/phAlgunIfull2299BCE.png", units="in", res=600, width=8, height=8)
+dev.copy(png, file="../output/figures/phAlgunIfullWithAbhijit2299BCE.png", units="in", res=600, width=8, height=8)
 dev.off()
